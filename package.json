@@ -1,0 +1,33 @@
+{
+  "name": "fsm-event",
+  "version": "1.0.0",
+  "description": "Stateful finite state machine wrapper around fsm",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && NODE_ENV=test node test",
+    "test-cov": "standard && NODE_ENV=test istanbul cover test.js"
+  },
+  "repository": "yoshuawuyts/fsm-event",
+  "keywords": [
+    "state machine",
+    "state",
+    "simple",
+    "unix",
+    "minimal",
+    "event"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "fsm": "^1.0.2"
+  },
+  "devDependencies": {
+    "istanbul": "^0.3.13",
+    "standard": "^3.7.3",
+    "tape": "^4.0.0"
+  },
+  "files": [
+    "LICENSE",
+    "index.js",
+    "README.md"
+  ]
+}
