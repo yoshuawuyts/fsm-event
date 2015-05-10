@@ -6,7 +6,8 @@
 [![js-standard-style][standard-image]][standard-url]
 
 Stateful finite state machine wrapper around
-[`fsm`](https://github.com/dominictarr/fsm).
+[`fsm`](https://github.com/dominictarr/fsm). Emits events when transitioning
+states.
 
 ## Installation
 ```bash
@@ -41,7 +42,7 @@ m('START')
 ```
 
 ## API
-### const m = fsm(events)
+### m = fsm(events)
 Create a state machine.
 
 ### m.on(event, cb)
@@ -64,8 +65,8 @@ proceed to the next state.
 ## Why?
 Most state machines have overly complicated interfaces for managing state. The
 `fsm` state machine is stateless, so I wrote a stateful wrapper around it. This
-allows me to managage application state without creating complex branches; my
-direct use case for this was building stateful UI elements.
+allows managing application state without creating complex branches; my direct
+use case for this was building stateful UI elements.
 
 ## See Also
 - [fsm](https://github.com/dominictarr/fsm) - Finite State Machines in javascript
