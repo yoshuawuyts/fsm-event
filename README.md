@@ -34,11 +34,13 @@ const m = fsm({
   END: {}
 })
 
+m.on('START:leave', cb => console.log('leaving start!'); cb())
 m.on('PAUSED', () => console.log('paused state!'))
-m.on('PAUSED:enter', cb => cb())
-m.on('PAUSED:leave', cb => cb())
 
 m('START')
+m('PAUSED')
+// 'leaving start'
+// 'paused state!'
 ```
 
 ## API
@@ -49,13 +51,13 @@ Create a state machine.
 Attach a listener to the state machine.
 
 ### m(event)
-Trigger an event on the state machine. Must be a valid state defined on
-init. Alias: `m.emit(event)`.
+Transition states in the state machine. Must be a valid state defined on init.
+Will throw if an invalid transition is triggered. Alias: `m.emit(event)`.
 
 ## Events
-Each state triggers 3 events. __important:__ When listening to `:enter` or
-`:leave` events, the callback must be called so that the state machine can
-proceed to the next state.
+Each state transition triggers 3 events. __important:__ When listening to
+`:enter` or `:leave` events, the callback must be called so that the state
+machine can proceed to the next state.
 ```txt
 <state>         main state function 
 <state>:enter   called when transitioning into state
