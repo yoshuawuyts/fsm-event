@@ -1,6 +1,6 @@
 {
   "name": "fsm-event",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Stateful finite state machine wrapper around fsm",
   "main": "index.js",
   "scripts": {
