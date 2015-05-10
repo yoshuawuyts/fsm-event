@@ -66,9 +66,9 @@ machine can proceed to the next state.
 
 ## Why?
 Most state machines have overly complicated interfaces for managing state. The
-`fsm` state machine is stateless, so I wrote a stateful wrapper around it. This
-allows managing application state without creating complex branches; my direct
-use case for this was building stateful UI elements.
+fsm state machine is simple but doesn't manage state for you, so I wrote a
+wrapper around it that manages state in an event-driven way. The initial use
+case was to manage complex, stateful UI elements but it can be used anywhere.
 
 ## See Also
 - [fsm](https://github.com/dominictarr/fsm) - Finite State Machines in javascript
