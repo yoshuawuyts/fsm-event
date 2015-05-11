@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "istanbul": "^0.3.13",
+    "noop2": "^1.0.1",
     "standard": "^3.7.3",
     "tape": "^4.0.0"
   },

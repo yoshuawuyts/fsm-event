@@ -1,5 +1,8 @@
+const noop = require('noop2')
 const test = require('tape')
 const fsm = require('./')
+
+noop()
 
 test('should validate input states', function (t) {
   t.plan(2)
@@ -26,7 +29,7 @@ test('m.on() should attach events', function (t) {
     DOWN: {up: 'UP'}
   })
 
-  m.on('UP', function () {})
+  m.on('UP', noop)
   t.equal(typeof m._emitter._events.UP, 'function')
 })
 
@@ -77,11 +80,8 @@ test('m.emit() should emit enter events', function (t) {
     t.pass('UP')
   })
 
-  m.on('null:leave', function () {
-    t.fail('leave called')
-  })
-
   m.emit('UP')
+  m.emit('DOWN')
 })
 
 test('m.emit() should emit events in sequence', function (t) {
