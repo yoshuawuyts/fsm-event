@@ -19,19 +19,8 @@ $ npm install fsm-event
 const fsm = require('fsm-event')
 
 const m = fsm('START', {
-  START: {
-    data: 'START',
-    pause: 'PAUSED',
-    end: 'END',
-    error: 'ERROR'
-  },
-  PAUSED: {
-    pause: 'PAUSED',
-    resume: 'START',
-    error: 'ERROR'
-  },
-  ERROR: {},
-  END: {}
+  START: { pause: 'PAUSED' },
+  PAUSED: { resume: 'START' }
 })
 
 m.on('START:leave', cb => console.log('leaving start!'); cb())
@@ -43,11 +32,12 @@ m('pause')
 ```
 
 ## API
-### m = fsm(start='START', events)
-Create a state machine.
+### m = fsm([start,] events)
+Create a state machine. `start` defaults to `START`.
 
 ### m.on(event, cb)
-Attach a listener to the state machine.
+Attach a listener to the state machine. See [events](#Events) for an overview
+of all events.
 
 ### m(event)
 Transition states in the state machine. Must be a valid transition defined on
@@ -59,9 +49,10 @@ Each state transition triggers 3 events. __important:__ When listening to
 `:enter` or `:leave` events, the callback must be called so that the state
 machine can proceed to the next state.
 ```txt
-<state>         main state function 
-<state>:enter   called when transitioning into state
-<state>:leave   called when transitioning away from state
+error           incorrect transition
+<state>         when new state is entered
+<state>:enter   when transitioning into state
+<state>:leave   when transitioning away from state
 ```
 
 ## Why?
