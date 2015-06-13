@@ -71,10 +71,10 @@ wrapper around it that manages state in an event-driven way. The initial use
 case was to manage complex, stateful UI elements but it can be used anywhere.
 
 ## See Also
-- [fsm](https://github.com/dominictarr/fsm) - Finite State Machines in javascript
-- [machina.js](https://github.com/ifandelse/machina.js) - js ex machina - finite state machines in JavaScript
-- [javascript-state-machine](https://github.com/jakesgordon/javascript-state-machine) - A finite state machine javascript micro framework
-- [SimpleStateManager](https://github.com/SimpleStateManager/SimpleStateManager) - browser width state manager
+- [fsm](https://github.com/dominictarr/fsm)
+- [javascript-state-machine](https://github.com/jakesgordon/javascript-state-machine)
+- [statement](https://github.com/timoxley/statement)
+- [stream-fsm](https://www.npmjs.com/package/stream-fsm)
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
