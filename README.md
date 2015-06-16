@@ -18,7 +18,7 @@ $ npm install fsm-event
 ```js
 const fsm = require('fsm-event')
 
-const m = fsm({
+const m = fsm('START', {
   START: {
     data: 'START',
     pause: 'PAUSED',
@@ -37,22 +37,22 @@ const m = fsm({
 m.on('START:leave', cb => console.log('leaving start!'); cb())
 m.on('PAUSED', () => console.log('paused state!'))
 
-m('START')
-m('PAUSED')
+m('pause')
 // 'leaving start'
 // 'paused state!'
 ```
 
 ## API
-### m = fsm(events)
+### m = fsm(start='START', events)
 Create a state machine.
 
 ### m.on(event, cb)
 Attach a listener to the state machine.
 
 ### m(event)
-Transition states in the state machine. Must be a valid state defined on init.
-Will throw if an invalid transition is triggered. Alias: `m.emit(event)`.
+Transition states in the state machine. Must be a valid transition defined on
+initalization. Will throw if an invalid transition is triggered. Alias:
+`m.emit(event)`.
 
 ## Events
 Each state transition triggers 3 events. __important:__ When listening to

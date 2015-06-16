@@ -6,17 +6,23 @@ module.exports = fsmEvent
 
 // create an fsmEvent instance
 // obj -> fn
-function fsmEvent (events) {
+function fsmEvent (start, events) {
+  if (typeof start === 'object') {
+    events = start
+    start = 'START'
+  }
+  assert.equal(typeof start, 'string')
   assert.equal(typeof events, 'object')
+  assert.ok(events[start], 'invalid starting state ' + start)
   assert.ok(fsm.validate(events))
 
   const emitter = new EventEmitter()
-  emit.on = on
-  emit.emit = emit
-  emit._state = null
-  emit._events = events
+  emit._graph = fsm.reachable(events)
   emit._emitter = emitter
-  emit._reachable = fsm.reachable(events)
+  emit._events = events
+  emit._state = start
+  emit.emit = emit
+  emit.on = on
 
   return emit
 
@@ -29,10 +35,11 @@ function fsmEvent (events) {
   // change the state
   // str -> null
   function emit (str) {
-    assert.ok(direct(emit._state, str, emit._reachable))
+    const nwState = emit._events[emit._state][str]
+    assert.ok(reach(emit._state, nwState, emit._graph), str + ' is unreachable')
 
     const leaveEv = emit._state + ':leave'
-    const enterEv = str + ':enter'
+    const enterEv = nwState + ':enter'
 
     if (!emit._state) return enter()
     return leave()
@@ -48,18 +55,19 @@ function fsmEvent (events) {
     }
 
     function done () {
-      emit._state = str
-      emitter.emit(str)
+      emit._state = nwState
+      emitter.emit(nwState)
     }
   }
 }
 
 // check if state can reach in reach
 // str, str, obj -> bool
-function direct (curr, next, reach) {
+function reach (curr, next, reachable) {
+  if (!next) return false
   if (!curr) return true
 
-  const here = reach[curr]
-  if (!here[next]) return false
+  const here = reachable[curr]
+  if (!here || !here[next]) return false
   return here[next].length === 1
 }
