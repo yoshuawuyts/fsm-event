@@ -36,7 +36,10 @@ function fsmEvent (start, events) {
   // str -> null
   function emit (str) {
     const nwState = emit._events[emit._state][str]
-    assert.ok(reach(emit._state, nwState, emit._graph), str + ' is unreachable')
+    if (!reach(emit._state, nwState, emit._graph)) {
+      const err = 'invalid transition: ' + emit._state + ' -> ' + str
+      return emitter.emit('error', err)
+    }
 
     const leaveEv = emit._state + ':leave'
     const enterEv = nwState + ':enter'
