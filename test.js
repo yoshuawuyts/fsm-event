@@ -49,7 +49,10 @@ test('m.emit() should catch invalid state transitions', function (t) {
   t.equal(m._state, 'UP')
   m('down')
   t.equal(m._state, 'DOWN')
-  t.throws(m.bind(null, 'END'))
+  m.on('error', function (err) {
+    t.equal(err, 'invalid transition: DOWN -> END')
+  })
+  m('END')
 })
 
 test('m.emit() should set the state', function (t) {
