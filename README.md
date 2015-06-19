@@ -72,7 +72,7 @@ case was to manage complex, stateful UI elements but it can be used anywhere.
 
 [npm-image]: https://img.shields.io/npm/v/fsm-event.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/fsm-event
-[travis-image]: https://img.shields.io/travis/yoshuawuyts/fsm-event.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/yoshuawuyts/fsm-event/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/yoshuawuyts/fsm-event
 [coveralls-image]: https://img.shields.io/coveralls/yoshuawuyts/fsm-event.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/yoshuawuyts/fsm-event?branch=master
