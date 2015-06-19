@@ -48,13 +48,15 @@ function fsmEvent (start, events) {
     return leave()
 
     function leave () {
-      if (!emitter._events[leaveEv]) enter()
-      else emitter.emit(leaveEv, enter)
+      const ev = emitter._events[leaveEv]
+      if (!ev || ev.length) return enter()
+      emitter.emit(leaveEv, enter)
     }
 
     function enter () {
-      if (!emitter._events[enterEv]) done()
-      else emitter.emit(enterEv, done)
+      const ev = emitter._events[enterEv]
+      if (!ev || ev.length) done()
+      emitter.emit(enterEv, done)
     }
 
     function done () {

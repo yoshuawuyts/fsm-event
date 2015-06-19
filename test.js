@@ -128,3 +128,29 @@ test('m.emit() should emit events in sequence', function (t) {
   m.emit('up')
   m.emit('down')
 })
+
+test('events require a callback, maybe', function (t) {
+  t.plan(3)
+
+  var i = 0
+  const m = fsm('DOWN', {
+    UP: {down: 'DOWN'},
+    DOWN: {up: 'UP'}
+  })
+
+  m.on('UP:enter', function () {
+    t.equal(++i, 1)
+  })
+
+  m.on('UP:leave', function () {
+    t.equal(++i, 2)
+  })
+
+  m.on('DOWN:enter', function (cb) {
+    t.equal(++i, 3)
+    cb()
+  })
+
+  m.emit('up')
+  m.emit('down')
+})
