@@ -60,6 +60,7 @@ function fsmEvent (start, events) {
     function done () {
       emit._state = nwState
       emitter.emit(nwState)
+      emitter.emit('done')
     }
   }
 }

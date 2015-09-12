@@ -128,3 +128,15 @@ test('m.emit() should emit events in sequence', function (t) {
   m.emit('up')
   m.emit('down')
 })
+
+test('should emit an end event when done', function (t) {
+  t.plan(1)
+  const m = fsm('DOWN', {
+    UP: {down: 'DOWN'},
+    DOWN: {up: 'UP'}
+  })
+  m.on('done', function () {
+    t.pass('called')
+  })
+  m.emit('up')
+})

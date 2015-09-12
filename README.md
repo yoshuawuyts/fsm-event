@@ -53,6 +53,7 @@ error           incorrect transition
 <state>         when new state is entered
 <state>:enter   when transitioning into state
 <state>:leave   when transitioning away from state
+done            when state transition finished
 ```
 
 ## Why?
